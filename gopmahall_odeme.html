@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>GOPMAHALL Ödeme Bilgileri</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    text-align:center;
+    padding:30px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:14px;
+    box-shadow:0 0 12px rgba(0,0,0,0.1);
+}
+
+.logo{
+    max-width:280px;
+    margin-bottom:20px;
+}
+
+h1{
+    color:#0d3b3f;
+    margin-bottom:25px;
+}
+
+.card{
+    border:2px solid #0d3b3f;
+    border-radius:12px;
+    padding:18px;
+    margin:18px 0;
+}
+
+.copy{
+    background:#eaf6f6;
+    padding:10px;
+    border-radius:6px;
+    margin:6px 0;
+    cursor:pointer;
+    user-select:none;
+}
+
+.copy:hover{
+    background:#cdeaea;
+}
+
+.small{
+    font-size:14px;
+    color:gray;
+}
+
+@media print{
+    body{background:white;}
+    .container{box-shadow:none;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LOGO -->
+<img src="gop-mahal-logo.png" class="logo">
+
+<h1>Ödeme Bilgileri</h1>
+<p class="small">Alıcı adı veya IBAN’a tıklayarak kopyalayabilirsiniz</p>
+
+<div id="list"></div>
+
+</div>
+
+<script>
+const hesaplar = [
+{
+    ad:"Kira Hesabı",
+    alici:"Abdullah Yıldız Meral Yıldız Adi Ortaklığı",
+    iban:"TR45 0003 2000 0118 6698 81"
+},
+{
+    ad:"Depozito Hesabı",
+    alici:"Abdullah Yıldız Meral Yıldız Adi Ortaklığı",
+    iban:"TR41 0003 2000 0000 0118 6703 41"
+},
+{
+    ad:"Elektrik – Su – Aidat Hesabı",
+    alici:"Abdullah Yıldız Meral Yıldız Adi Ortaklığı",
+    iban:"TR93 0003 2000 0000 0118 6697 93"
+}
+];
+
+function kopyala(text){
+    navigator.clipboard.writeText(text);
+    alert("Kopyalandı:\n" + text);
+}
+
+const list = document.getElementById("list");
+
+hesaplar.forEach(h => {
+    list.innerHTML += `
+        <div class="card">
+            <h3>${h.ad}</h3>
+
+            <div class="copy" onclick="kopyala('${h.alici}')">
+                👤 ${h.alici}
+            </div>
+
+            <div class="copy" onclick="kopyala('${h.iban}')">
+                💳 ${h.iban}
+            </div>
+        </div>
+    `;
+});
+</script>
+
+</body>
+</html>
