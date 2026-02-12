@@ -1,106 +1,170 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>GOPMAHALL Ödeme Bilgileri</title>
+<title>GOPMAHALL Kiracı Paneli</title>
 
 <style>
 :root{
-    --ana:#0d3b3f;
-    --altin:#c9a227;
+--primary:#0d3b3f;
+--accent:#16a085;
+--bg:#f4f7f8;
 }
 
+/* ===== BODY ===== */
 body{
-    font-family: Arial, sans-serif;
-    background:var(--ana);
-    margin:0;
-    padding:20px;
-    text-align:center;
-    color:white;
+font-family:"Segoe UI",Arial,sans-serif;
+background:var(--bg);
+margin:0;
+padding:16px;
 }
 
-/* CONTAINER */
+/* ===== CONTAINER ===== */
 .container{
-    max-width:900px;
-    margin:auto;
+max-width:520px;
+margin:auto;
+background:white;
+border-radius:22px;
+padding:26px;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+animation:fade .5s ease;
 }
 
-/* LOGO */
+@keyframes fade{
+from{opacity:0; transform:translateY(15px)}
+to{opacity:1}
+}
+
+/* ===== LOGO ===== */
 .logo{
-    width:260px;
-    max-width:80%;
-    margin:20px auto 30px;
+width:180px;
+display:block;
+margin:auto;
+animation:logoIn .9s ease;
+transition:.3s;
 }
 
-/* GRID */
-.grid{
-    display:grid;
-    gap:18px;
+.logo:hover{
+transform:scale(1.05);
+filter:drop-shadow(0 6px 12px rgba(0,0,0,.15));
+opacity:.9;
 }
 
-@media(min-width:700px){
-    .grid{
-        grid-template-columns: repeat(3, 1fr);
-    }
+@keyframes logoIn{
+0%{opacity:0; transform:translateY(-20px) scale(.9)}
+100%{opacity:1; transform:none}
 }
 
-/* CARD */
+/* ===== TEXT ===== */
+h1{
+text-align:center;
+color:var(--primary);
+margin:18px 0;
+}
+
+/* ===== CARD ===== */
 .card{
-    background:white;
-    color:#222;
-    border-radius:16px;
-    padding:18px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+border:1px solid #e6e6e6;
+border-radius:14px;
+padding:16px;
+margin:14px 0;
+transition:.25s;
 }
 
-.card h3{
-    color:var(--ana);
-    margin-bottom:12px;
+.card:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,.07);
 }
 
-/* COPY AREA */
+.title{
+font-weight:600;
+color:var(--primary);
+margin-bottom:10px;
+}
+
+/* ===== COPY ===== */
 .copy{
-    background:#f5f7f7;
-    padding:12px;
-    border-radius:10px;
-    margin:8px 0;
-    cursor:pointer;
-    font-weight:bold;
-    word-break:break-all;
+background:#f1f6f7;
+padding:10px;
+border-radius:8px;
+margin-top:6px;
+cursor:pointer;
+text-align:center;
+font-size:14px;
+transition:.2s;
 }
 
 .copy:hover{
-    background:#e6ecec;
+background:#e1eeee;
 }
 
-/* QR */
-.qr{
-    margin-top:35px;
+/* ===== BUTTON ===== */
+button{
+background:var(--primary);
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:8px;
+cursor:pointer;
+margin:6px 4px 0 0;
 }
 
-.qr img{
-    width:200px;
+button:hover{
+background:#14565b;
 }
 
-/* TOAST */
+/* ===== LANG ===== */
+.lang{
+text-align:right;
+font-size:13px;
+margin-bottom:6px;
+}
+
+.lang button{
+background:none;
+color:var(--primary);
+font-weight:600;
+}
+
+/* ===== TOAST ===== */
 .toast{
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:var(--altin);
-    color:black;
-    padding:10px 18px;
-    border-radius:10px;
-    display:none;
+position:fixed;
+bottom:28px;
+left:50%;
+transform:translateX(-50%);
+background:var(--accent);
+color:white;
+padding:10px 22px;
+border-radius:30px;
+font-size:14px;
+display:none;
+animation:pop .25s ease;
 }
 
-/* PRINT */
+@keyframes pop{
+from{transform:translate(-50%,10px);opacity:0}
+to{transform:translate(-50%,0);opacity:1}
+}
+
+/* ===== FOOTER ===== */
+.footer{
+text-align:center;
+margin-top:28px;
+font-size:12px;
+color:#777;
+}
+
+.footer a{
+color:#777;
+text-decoration:none;
+}
+
+/* ===== PRINT ===== */
 @media print{
-    body{background:white;color:black}
-    .toast{display:none}
+body{background:white}
+.container{box-shadow:none}
 }
 </style>
 </head>
@@ -109,68 +173,99 @@ body{
 
 <div class="container">
 
+<div class="lang">
+<button onclick="setLang('tr')">TR</button> |
+<button onclick="setLang('en')">EN</button>
+</div>
+
+<!-- LOGO CLICKABLE -->
+<a href="https://www.gopmahall.com" target="_blank">
 <img src="gop-mahal-logo.png" class="logo">
+</a>
 
-<h2>Ödeme Bilgileri</h2>
-<p>Alıcı adı veya IBAN’a dokunarak kopyalayabilirsiniz</p>
+<h1 id="title">Ödeme Bilgileri</h1>
 
-<div class="grid" id="list"></div>
+<div id="list"></div>
 
-<div class="qr">
-    <img src="qr.png">
+<div class="footer">
+© 2026 GOPMAHALL •
+<a href="https://www.gopmahall.com" target="_blank">www.gopmahall.com</a>
 </div>
 
 </div>
 
-<div class="toast" id="toast">Kopyalandı</div>
+<div id="toast" class="toast">Kopyalandı ✓</div>
 
 <script>
-const hesaplar = [
-{
-    ad:"Kira Hesabı",
-    alici:"Abdullah Yıldız Meral Yıldız Adi Ortaklığı",
-    iban:"TR45 0003 2000 0000 0118 6698 81"
-},
-{
-    ad:"Depozito Hesabı",
-    alici:"Abdullah Yıldız Meral Yıldız Adi Ortaklığı",
-    iban:"TR41 0003 2000 0000 0118 6703 41"
-},
-{
-    ad:"Elektrik • Su • Aidat",
-    alici:"Abdullah Yıldız Meral Yıldız Adi Ortaklığı",
-    iban:"TR93 0003 2000 0000 0118 6697 93"
-}
+
+const alici="Abdullah Yıldız Meral Yıldız Adi Ortaklığı";
+
+const wifiSSID="GOP_MAHALL";
+const wifiPASS="@q2025GOPMAHALL";
+
+const hesaplar=[
+["Kira Hesabı","Rent Account","TR45 0003 2000 0000 0118 6698 81"],
+["Depozito Hesabı","Deposit Account","TR41 0003 2000 0000 0118 6703 41"],
+["Elektrik – Su – Aidat","Utilities","TR93 0003 2000 0000 0118 6697 93"]
 ];
 
+const langData={
+tr:{title:"Ödeme Bilgileri",wifi:"Wi-Fi Bilgileri"},
+en:{title:"Payment Information",wifi:"Wi-Fi Access"}
+};
+
+let lang="tr";
+
 function toast(){
-    const t=document.getElementById("toast");
-    t.style.display="block";
-    setTimeout(()=>t.style.display="none",1200);
+const t=document.getElementById("toast");
+t.style.display="block";
+setTimeout(()=>t.style.display="none",1200);
 }
 
-function kopyala(text){
-    navigator.clipboard.writeText(text);
-    toast();
+function copy(text){
+navigator.clipboard.writeText(text);
+toast();
 }
+
+function setLang(l){
+lang=l;
+document.getElementById("title").innerText=langData[l].title;
+render();
+}
+
+function render(){
 
 const list=document.getElementById("list");
+list.innerHTML="";
 
+/* ACCOUNTS */
 hesaplar.forEach(h=>{
-    list.innerHTML+=`
-    <div class="card">
-        <h3>${h.ad}</h3>
-
-        <div class="copy" onclick="kopyala('${h.alici}')">
-        👤 ${h.alici}
-        </div>
-
-        <div class="copy" onclick="kopyala('${h.iban}')">
-        💳 ${h.iban}
-        </div>
-    </div>
-    `;
+list.innerHTML+=`
+<div class="card">
+<div class="title">${lang==="tr"?h[0]:h[1]}</div>
+<div class="copy" onclick="copy('${alici}')">👤 ${alici}</div>
+<div class="copy" onclick="copy('${h[2]}')">💳 ${h[2]}</div>
+</div>`;
 });
+
+/* WIFI */
+list.innerHTML+=`
+<div class="card">
+<div class="title">${langData[lang].wifi}</div>
+<div>📶 SSID: <b>${wifiSSID}</b></div>
+<button onclick="togglePass()">Göster / Gizle</button>
+<button onclick="copy('${wifiPASS}')">Kopyala</button>
+<div id="pass" style="margin-top:8px">••••••••••••</div>
+</div>`;
+}
+
+function togglePass(){
+const el=document.getElementById("pass");
+el.innerText=el.innerText.includes("•")?wifiPASS:"••••••••••••";
+}
+
+render();
+
 </script>
 
 </body>
