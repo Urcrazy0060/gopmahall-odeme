@@ -4,236 +4,268 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>GOPMAHALL Portal</title>
-
-<link rel="manifest" href="manifest.json"/>
+<title>GOPMAHALL Kiracı Paneli</title>
 
 <style>
 :root{
-  --main:#0d3b3f;
-  --soft:#f6f8f9;
-  --border:#e5e7eb;
+--primary:#0d3b3f;
+--accent:#16a085;
+--bg:#f4f7f8;
 }
 
+/* ===== BODY ===== */
 body{
-  margin:0;
-  font-family: "Segoe UI", Arial;
-  background:white;
-  color:#222;
+font-family:"Segoe UI",Arial,sans-serif;
+background:var(--bg);
+margin:0;
+padding:16px;
 }
 
-/* HEADER */
-.header{
-  text-align:center;
-  padding:40px 20px 20px;
-}
-
-.logo{
-  width:210px;
-  cursor:pointer;
-  animation:float 3s ease-in-out infinite;
-  transition:.3s;
-}
-.logo:hover{transform:scale(1.05)}
-
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
-}
-
-h1{
-  margin-top:12px;
-  color:var(--main);
-}
-
-/* CONTAINER */
+/* ===== CONTAINER ===== */
 .container{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
+max-width:520px;
+margin:auto;
+background:white;
+border-radius:22px;
+padding:26px;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+animation:fade .5s ease;
 }
 
-/* CARD */
+@keyframes fade{
+from{opacity:0; transform:translateY(15px)}
+to{opacity:1}
+}
+
+/* ===== LOGO ===== */
+.logo{
+width:180px;
+display:block;
+margin:auto;
+animation:logoIn .9s ease;
+transition:.3s;
+}
+
+.logo:hover{
+transform:scale(1.05);
+filter:drop-shadow(0 6px 12px rgba(0,0,0,.15));
+opacity:.9;
+}
+
+@keyframes logoIn{
+0%{opacity:0; transform:translateY(-20px) scale(.9)}
+100%{opacity:1; transform:none}
+}
+
+/* ===== TEXT ===== */
+h1{
+text-align:center;
+color:var(--primary);
+margin:18px 0;
+}
+
+/* ===== CARD ===== */
 .card{
-  background:white;
-  border-radius:16px;
-  padding:20px;
-  margin-bottom:20px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.07);
-  border:1px solid var(--border);
-  transition:.25s;
+border:1px solid #e6e6e6;
+border-radius:14px;
+padding:16px;
+margin:14px 0;
+transition:.25s;
 }
 
 .card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 22px rgba(0,0,0,0.1);
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,.07);
 }
 
 .title{
-  font-weight:600;
-  margin-bottom:12px;
-  color:var(--main);
+font-weight:600;
+color:var(--primary);
+margin-bottom:10px;
 }
 
-/* COPY */
+/* ===== COPY ===== */
 .copy{
-  padding:12px;
-  background:var(--soft);
-  border-radius:10px;
-  margin:6px 0;
-  cursor:pointer;
-  font-size:15px;
-  transition:.2s;
+background:#f1f6f7;
+padding:10px;
+border-radius:8px;
+margin-top:6px;
+cursor:pointer;
+text-align:center;
+font-size:14px;
+transition:.2s;
 }
-.copy:hover{background:#e3f2f3}
 
-/* WIFI */
-.hidden{filter:blur(6px)}
+.copy:hover{
+background:#e1eeee;
+}
 
-/* BUTTON */
+/* ===== BUTTON ===== */
 button{
-  background:var(--main);
-  color:white;
-  border:none;
-  padding:8px 14px;
-  border-radius:8px;
-  cursor:pointer;
-  margin-top:10px;
+background:var(--primary);
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:8px;
+cursor:pointer;
+margin:6px 4px 0 0;
 }
 
-/* FOOTER */
-.footer{
-  text-align:center;
-  padding:40px 10px;
-  font-size:14px;
-  color:#666;
+button:hover{
+background:#14565b;
 }
 
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:var(--main);
-  color:white;
-  padding:10px 18px;
-  border-radius:10px;
-  opacity:0;
-  transition:.4s;
-}
-.toast.show{opacity:1}
-
-/* LANG */
+/* ===== LANG ===== */
 .lang{
-  position:fixed;
-  top:10px;
-  right:10px;
+text-align:right;
+font-size:13px;
+margin-bottom:6px;
 }
 
-@media(max-width:600px){
-  .card{padding:16px}
+.lang button{
+background:none;
+color:var(--primary);
+font-weight:600;
+}
+
+/* ===== TOAST ===== */
+.toast{
+position:fixed;
+bottom:28px;
+left:50%;
+transform:translateX(-50%);
+background:var(--accent);
+color:white;
+padding:10px 22px;
+border-radius:30px;
+font-size:14px;
+display:none;
+animation:pop .25s ease;
+}
+
+@keyframes pop{
+from{transform:translate(-50%,10px);opacity:0}
+to{transform:translate(-50%,0);opacity:1}
+}
+
+/* ===== FOOTER ===== */
+.footer{
+text-align:center;
+margin-top:28px;
+font-size:12px;
+color:#777;
+}
+
+.footer a{
+color:#777;
+text-decoration:none;
+}
+
+/* ===== PRINT ===== */
+@media print{
+body{background:white}
+.container{box-shadow:none}
 }
 </style>
 </head>
 
 <body>
 
-<div class="lang">
-  <button onclick="setLang('tr')">TR</button>
-  <button onclick="setLang('en')">EN</button>
-</div>
-
-<div class="header">
-  <a href="https://www.gopmahall.com" target="_blank">
-    <img src="gop-mahal-logo.png" class="logo">
-  </a>
-  <h1 id="title">Ödeme & Bilgilendirme Portalı</h1>
-</div>
-
 <div class="container">
 
-  <!-- ÖDEME -->
-  <div class="card">
-    <div class="title">Kira Hesabı</div>
-    <div class="copy" onclick="copy(this)">
-      👤 Abdullah Yıldız Meral Yıldız Adi Ortaklığı
-    </div>
-    <div class="copy" onclick="copy(this)">
-      💳 TR45 0003 2000 0000 0118 6698 81
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="title">Depozito Hesabı</div>
-    <div class="copy" onclick="copy(this)">
-      💳 TR41 0003 2000 0000 0118 6703 41
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="title">Elektrik • Su • Aidat</div>
-    <div class="copy" onclick="copy(this)">
-      💳 TR93 0003 2000 0000 0118 6697 93
-    </div>
-  </div>
-
-  <!-- WIFI -->
-  <div class="card">
-    <div class="title">WiFi</div>
-    <div>SSID: <b>GOP_MAHALL</b></div>
-
-    <div id="pass" class="copy hidden">@q2025GOPMAHALL</div>
-
-    <button onclick="togglePass()">Göster / Gizle</button>
-    <button onclick="copyPass()">Şifreyi Kopyala</button>
-  </div>
-
-  <!-- İLETİŞİM -->
-  <div class="card">
-    <div class="title">İletişim</div>
-    📞 0533 374 40 30 <br><br>
-    🌐 www.gopmahall.com <br><br>
-    📷 instagram.com/gopmahall
-  </div>
-
+<div class="lang">
+<button onclick="setLang('tr')">TR</button> |
+<button onclick="setLang('en')">EN</button>
 </div>
 
+<!-- LOGO CLICKABLE -->
+<a href="https://www.gopmahall.com" target="_blank">
+<img src="gop-mahal-logo.png" class="logo">
+</a>
+
+<h1 id="title">Ödeme Bilgileri</h1>
+
+<div id="list"></div>
+
 <div class="footer">
-  © 2026 GOPMAHALL ✓ Tüm Hakları Saklıdır
+© 2026 GOPMAHALL •
+<a href="https://www.gopmahall.com" target="_blank">www.gopmahall.com</a>
+</div>
+
 </div>
 
 <div id="toast" class="toast">Kopyalandı ✓</div>
 
 <script>
-function copy(el){
-  navigator.clipboard.writeText(el.innerText)
-  showToast()
+
+const alici="Abdullah Yıldız Meral Yıldız Adi Ortaklığı";
+
+const wifiSSID="GOP_MAHALL";
+const wifiPASS="@q2025GOPMAHALL";
+
+const hesaplar=[
+["Kira Hesabı","Rent Account","TR45 0003 2000 0000 0118 6698 81"],
+["Depozito Hesabı","Deposit Account","TR41 0003 2000 0000 0118 6703 41"],
+["Elektrik – Su – Aidat","Utilities","TR93 0003 2000 0000 0118 6697 93"]
+];
+
+const langData={
+tr:{title:"Ödeme Bilgileri",wifi:"Wi-Fi Bilgileri"},
+en:{title:"Payment Information",wifi:"Wi-Fi Access"}
+};
+
+let lang="tr";
+
+function toast(){
+const t=document.getElementById("toast");
+t.style.display="block";
+setTimeout(()=>t.style.display="none",1200);
 }
 
-function copyPass(){
-  navigator.clipboard.writeText("@q2025GOPMAHALL")
-  showToast()
+function copy(text){
+navigator.clipboard.writeText(text);
+toast();
+}
+
+function setLang(l){
+lang=l;
+document.getElementById("title").innerText=langData[l].title;
+render();
+}
+
+function render(){
+
+const list=document.getElementById("list");
+list.innerHTML="";
+
+/* ACCOUNTS */
+hesaplar.forEach(h=>{
+list.innerHTML+=`
+<div class="card">
+<div class="title">${lang==="tr"?h[0]:h[1]}</div>
+<div class="copy" onclick="copy('${alici}')">👤 ${alici}</div>
+<div class="copy" onclick="copy('${h[2]}')">💳 ${h[2]}</div>
+</div>`;
+});
+
+/* WIFI */
+list.innerHTML+=`
+<div class="card">
+<div class="title">${langData[lang].wifi}</div>
+<div>📶 SSID: <b>${wifiSSID}</b></div>
+<button onclick="togglePass()">Göster / Gizle</button>
+<button onclick="copy('${wifiPASS}')">Kopyala</button>
+<div id="pass" style="margin-top:8px">••••••••••••</div>
+</div>`;
 }
 
 function togglePass(){
-  document.getElementById("pass").classList.toggle("hidden")
+const el=document.getElementById("pass");
+el.innerText=el.innerText.includes("•")?wifiPASS:"••••••••••••";
 }
 
-function showToast(){
-  const t=document.getElementById("toast")
-  t.classList.add("show")
-  setTimeout(()=>t.classList.remove("show"),1500)
-}
+render();
 
-/* dil */
-function setLang(l){
-  if(l==="en"){
-    document.getElementById("title").innerText="Payment & Info Portal"
-  }else{
-    document.getElementById("title").innerText="Ödeme & Bilgilendirme Portalı"
-  }
-}
 </script>
 
 </body>
